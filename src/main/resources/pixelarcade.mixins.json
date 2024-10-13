@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "net.nukebob.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+	],
+	"client": [
+		"TitleScreenMixin",
+		"GameMenuScreenMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

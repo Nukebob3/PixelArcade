@@ -1,0 +1,47 @@
+{
+	"schemaVersion": 1,
+	"id": "pixelarcade",
+	"version": "${version}",
+	"name": "Pixel Arcade",
+	"description": "Onscreen Minigames to play while you're bored",
+	"authors": [
+		"Nukebob3"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/project/pixelarcade",
+		"sources": "https://github.com/Nukebob3/PixelArcade",
+		"issues": "https://github.com/Nukebob3/PixelArcade/issues"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/pixelarcade/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"net.nukebob.PixelArcade"
+		],
+		"modmenu": [
+			"net.nukebob.config.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"pixelarcade.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.7",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "modmenu"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/FddwMasb",
+				"modmenu.youtube": "https://www.youtube.com/nukebob3",
+			},
+			"update_checker": true
+		}
+	}
+}
