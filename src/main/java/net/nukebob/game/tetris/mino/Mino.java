@@ -140,8 +140,8 @@ public class Mino {
         BlockState blockState;
         while (true) {
             block = Registries.BLOCK.get(new Random().nextInt(Registries.BLOCK.size()));
-            blockState = block.getDefaultState();
-            quads = client.getBlockRenderManager().getModel(blockState).getQuads(blockState, Direction.NORTH, MinecraftClient.getInstance().textRenderer.random);
+            blockState = block.getStateManager().getStates().get(new Random().nextInt(block.getStateManager().getStates().size()));
+            quads = client.getBlockRenderManager().getModel(blockState).getQuads(blockState, Direction.random(MinecraftClient.getInstance().textRenderer.random), MinecraftClient.getInstance().textRenderer.random);
             if (!(quads.isEmpty())) {
                 texture = quads.get(new Random().nextInt(quads.size())).getSprite().getContents();
                 if (texture.getWidth() == 16 && texture.getHeight() == 16) {
@@ -152,7 +152,7 @@ public class Mino {
                         BufferedImage image;
                         try {
                             image = ImageIO.read(resource.getInputStream());
-                            return new TextureResource(Identifier.of(texture.getId().getNamespace().split(":")[0],"textures/" + texture.getId().getPath() + ".png"), image.getWidth(), image.getHeight());
+                            if (image.getRGB(0, 0) < 0 && image.getRGB(15, 0) < 0) return new TextureResource(Identifier.of(texture.getId().getNamespace().split(":")[0],"textures/" + texture.getId().getPath() + ".png"), image.getWidth(), image.getHeight());
                         } catch (Exception ignored) {}
                     }
                 }
@@ -220,6 +220,7 @@ public class Mino {
                     for (Block b : TetrisScreen.staticBlocks) {
                         if (block.y + Block.SIZE == b.y && block.x == b.x) {
                             proceed = false;
+                            break;
                         }
                     }
                 }

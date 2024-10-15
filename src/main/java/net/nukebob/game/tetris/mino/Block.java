@@ -25,13 +25,13 @@ public class Block {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         if (destroying == -1) {
-            context.drawTexture(texture, TetrisScreen.left_x + x, TetrisScreen.top_y + y, 0, 16 * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, 16, (int) (16f * (float) (textureWidth / textureHeight)));
+            context.drawTexture(texture, TetrisScreen.left_x + x, TetrisScreen.top_y + y, 0, Block.SIZE * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, Block.SIZE, (int) (Block.SIZE * (float) (textureWidth / textureHeight)));
         } else {
             MinecraftClient.getInstance().getTextureManager().bindTexture(texture);
             RenderSystem.setShaderColor(1, 1, 1, 1 - (destroying * 0.1f));
-            context.drawTexture(texture, TetrisScreen.left_x + x, TetrisScreen.top_y + y, 0, 16 * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, 16, (int) (16f * (float)(textureWidth / textureHeight)));
+            context.drawTexture(texture, TetrisScreen.left_x + x, TetrisScreen.top_y + y, 0, Block.SIZE * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, Block.SIZE, (int) (Block.SIZE * (float)(textureWidth / textureHeight)));
             RenderSystem.setShaderColor(1, 1, 1, 1);
-            context.drawTexture(Identifier.of("textures/block/destroy_stage_" + destroying + ".png"), TetrisScreen.left_x + x, TetrisScreen.top_y + y, 0, 16 * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, 16, (int) (16f * (float)(textureWidth / textureHeight)));
+            context.drawTexture(Identifier.of("textures/block/destroy_stage_" + destroying + ".png"), TetrisScreen.left_x + x, TetrisScreen.top_y + y, 0, Block.SIZE * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, Block.SIZE, (int) (Block.SIZE * (float)(textureWidth / textureHeight)));
         }
         RenderSystem.disableBlend();
     }
@@ -40,7 +40,7 @@ public class Block {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1, 1, 1, 0.3f);
-        context.drawTexture(texture, TetrisScreen.left_x + x, TetrisScreen.top_y + y + yOffset, 0, 16 * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, 16, (int) (16f * (float) (textureWidth / textureHeight)));
+        context.drawTexture(texture, TetrisScreen.left_x + x, TetrisScreen.top_y + y + yOffset, 0, Block.SIZE * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, Block.SIZE, (int) (Block.SIZE * (float) (textureWidth / textureHeight)));
         RenderSystem.setShaderColor(1, 1, 1, 1);
         RenderSystem.disableBlend();
     }

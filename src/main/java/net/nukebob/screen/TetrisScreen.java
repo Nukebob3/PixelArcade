@@ -24,7 +24,7 @@ import java.util.Random;
 public class TetrisScreen extends Screen {
     public static int dropInterval = 60;
     static final int gridX = 10;
-    static final int gridY = 15;
+    static final int gridY = 16;
     public static final int WIDTH = Block.SIZE * gridX;
     public static final int HEIGHT = Block.SIZE * gridY;
 
@@ -192,16 +192,15 @@ public class TetrisScreen extends Screen {
                 case 10: dropInterval = 6; break;
             }
 
-            currentMino = nextMino;
-            currentMino.setXY(WIDTH / 2, Block.SIZE);
-
             for (Block b : currentMino.b) {
-                for (Block sB : staticBlocks) {
-                    if (sB.x == b.x && sB.y == b.y) {
-                        gameOver();
-                    }
+                if (b.y <= Block.SIZE * 2) {
+                    gameOver();
+                    return;
                 }
             }
+
+            currentMino = nextMino;
+            currentMino.setXY(WIDTH / 2, Block.SIZE);
 
             nextMino = pickMino();
             nextMino.setXY(WIDTH + Block.SIZE * 2 +
@@ -270,7 +269,13 @@ public class TetrisScreen extends Screen {
         }
 
         //draw border
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.setShaderColor(1, 1, 1, 0.3f);
+        context.drawHorizontalLine(left_x - 1, right_x + 1, top_y - 1 + Block.SIZE * 3, Colors.RED);
+        RenderSystem.setShaderColor(1, 1, 1, 1);
         context.drawBorder(left_x - 1, top_y - 1, WIDTH + 2, HEIGHT + 2, Colors.WHITE);
+        RenderSystem.disableBlend();
 
         //draw moving mino
         if (currentMino!= null) {
