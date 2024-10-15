@@ -5,7 +5,7 @@ import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.widget.TextIconButtonWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.nukebob.PixelArcade;
+import net.nukebob.TetrisMC;
 import net.nukebob.config.ConfigManager;
 import net.nukebob.screen.TetrisScreen;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,9 +21,7 @@ public abstract class TitleScreenMixin extends Screen {
 
     @Inject(at = @At("RETURN"), method = "initWidgetsNormal")
     private void addMinigameButton(int y, int spacingY, CallbackInfo ci) {
-        TextIconButtonWidget textIconButtonWidget = TextIconButtonWidget.builder(Text.empty(), (button) -> {
-            this.client.setScreen(new TetrisScreen(this));
-        }, true).width(20).texture(Identifier.of(PixelArcade.MOD_ID, "icon/button"), 16, 16).build();
+        TextIconButtonWidget textIconButtonWidget = TextIconButtonWidget.builder(Text.empty(), (button) -> this.client.setScreen(new TetrisScreen(this)), true).width(20).texture(Identifier.of(TetrisMC.MOD_ID, "icon/button"), 16, 16).build();
         textIconButtonWidget.setPosition(this.width / 2 - 100 + 205, y);
         if (ConfigManager.loadConfig().mod_enabled) this.addDrawableChild(textIconButtonWidget);
     }

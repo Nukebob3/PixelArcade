@@ -6,12 +6,10 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextIconButtonWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.nukebob.PixelArcade;
+import net.nukebob.TetrisMC;
 import net.nukebob.config.ConfigManager;
-import net.nukebob.config.ModMenuIntegration;
 import net.nukebob.screen.TetrisScreen;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -24,9 +22,7 @@ public abstract class GameMenuScreenMixin extends Screen {
 
     @Inject(at = @At("RETURN"), method = "initWidgets")
     private void addMinigameButton(CallbackInfo ci) {
-        TextIconButtonWidget textIconButtonWidget = TextIconButtonWidget.builder(Text.empty(), (button) -> {
-            openScreen();
-        }, true).width(20).texture(Identifier.of(PixelArcade.MOD_ID, "icon/button"), 16, 16).build();
+        TextIconButtonWidget textIconButtonWidget = TextIconButtonWidget.builder(Text.empty(), (button) -> this.client.setScreen(new TetrisScreen(this)), true).width(20).texture(Identifier.of(TetrisMC.MOD_ID, "icon/button"), 16, 16).build();
         textIconButtonWidget.setPosition(this.width / 2 - 100 + 205, 50);
 
         for (ButtonWidget button : this.children().stream().filter(e -> e instanceof ButtonWidget).map(e -> (ButtonWidget) e).toList()) {
@@ -40,12 +36,5 @@ public abstract class GameMenuScreenMixin extends Screen {
         }
 
         if (ConfigManager.loadConfig().mod_enabled) this.addDrawableChild(textIconButtonWidget);
-    }
-
-    @Unique
-    private void openScreen() {
-        switch (ConfigManager.loadConfig().game) {
-            case 0: this.client.setScreen(new TetrisScreen(this)); break;
-        }
     }
 }

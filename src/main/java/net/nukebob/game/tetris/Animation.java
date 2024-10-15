@@ -2,7 +2,7 @@ package net.nukebob.game.tetris;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
-import net.nukebob.PixelArcade;
+import net.nukebob.TetrisMC;
 
 public class Animation {
     public int x;
@@ -24,10 +24,10 @@ public class Animation {
     }
 
     public void draw(DrawContext context) {
-        context.drawTexture(Identifier.of(PixelArcade.MOD_ID, "animation/" + animation + "/" + (int) frame + ".png"), x, y, 0, 0, width, height, width, height);
+        context.drawTexture(Identifier.of(TetrisMC.MOD_ID, "animation/" + animation + "/" + (int) frame + ".png"), x, y, 0, 0, width, height, width, height);
     }
 
     public void draw(DrawContext context, int x, int y) {
-        context.drawTexture(Identifier.of(PixelArcade.MOD_ID, "animation/" + animation + "/" + (int) frame + ".png"), x, y, 0, 0, width, height, width, height);
+        context.drawTexture(Identifier.of(TetrisMC.MOD_ID, "animation/" + animation + "/" + (int) frame + ".png"), x, y, 0, 0, width, height, width, height);
     }
 }

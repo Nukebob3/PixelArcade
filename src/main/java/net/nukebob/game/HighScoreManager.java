@@ -2,7 +2,7 @@ package net.nukebob.game;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.nukebob.PixelArcade;
+import net.nukebob.TetrisMC;
 import net.nukebob.util.Encryption;
 
 import java.io.File;
@@ -11,7 +11,7 @@ import java.io.FileWriter;
 
 public class HighScoreManager {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final File HIGH_SCORES_FILE = new File("config/" + PixelArcade.MOD_ID + ".high_scores.json");
+    private static final File HIGH_SCORES_FILE = new File("config/" + TetrisMC.MOD_ID + ".high_scores.json");
     private static HighScores highScores;
 
     public static HighScores loadHighScores() {
@@ -28,7 +28,7 @@ public class HighScoreManager {
 
                 highScores = GSON.fromJson(decryptedContent, HighScores.class);
             } catch (Exception e) {
-                PixelArcade.LOGGER.error("Could not load high scores file", e);
+                TetrisMC.LOGGER.error("Could not load high scores file", e);
                 highScores = new HighScores();
                 saveHighScores();
             }
@@ -44,7 +44,7 @@ public class HighScoreManager {
 
             writer.write(encryptedContent);
         } catch (Exception e) {
-            PixelArcade.LOGGER.error("Could not save high scores file", e);
+            TetrisMC.LOGGER.error("Could not save high scores file", e);
         }
     }
 }

@@ -215,12 +215,22 @@ public class Mino {
             if (bottomCollision) {
                 dropCounter += 30;
             } else {
-                MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.wooden_button.click_on")), 2.0F,  ConfigManager.loadConfig().tetris_volume));
+                boolean proceed = true;
                 for (Block block : b) {
-                    block.y += Block.SIZE;
+                    for (Block b : TetrisScreen.staticBlocks) {
+                        if (block.y + Block.SIZE == b.y && block.x == b.x) {
+                            proceed = false;
+                        }
+                    }
                 }
-                TetrisScreen.score++;
-                dropCounter = 0;
+                if (proceed) {
+                    MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.wooden_button.click_on")), 2.0F, ConfigManager.loadConfig().tetris_volume));
+                    for (Block block : b) {
+                        block.y += Block.SIZE;
+                    }
+                    TetrisScreen.score++;
+                    dropCounter = 0;
+                }
             }
             TetrisScreen.downPressed = false;
         }
@@ -244,10 +254,21 @@ public class Mino {
                 checkMovementCollision();
                 if (bottomCollision) active = false;
             } else {
+                boolean proceed = true;
                 for (Block block : b) {
-                    block.y += Block.SIZE;
+                    for (Block b : TetrisScreen.staticBlocks) {
+                        if (block.y + Block.SIZE == b.y && block.x == b.x) {
+                            proceed = false;
+                            break;
+                        }
+                    }
                 }
-                dropCounter = 0;
+                if (proceed) {
+                    for (Block block : b) {
+                        block.y += Block.SIZE;
+                    }
+                    dropCounter = 0;
+                }
             }
         }
     }

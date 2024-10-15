@@ -1,30 +1,30 @@
 {
 	"schemaVersion": 1,
-	"id": "pixelarcade",
+	"id": "tetrismc",
 	"version": "${version}",
-	"name": "Pixel Arcade",
-	"description": "Onscreen Minigames to play while you're bored",
+	"name": "Tetris MC",
+	"description": "Onscreen tetris to play while you're bored",
 	"authors": [
 		"Nukebob3"
 	],
 	"contact": {
-		"homepage": "https://modrinth.com/project/pixelarcade",
-		"sources": "https://github.com/Nukebob3/PixelArcade",
-		"issues": "https://github.com/Nukebob3/PixelArcade/issues"
+		"homepage": "https://modrinth.com/project/tetrismc",
+		"sources": "https://github.com/Nukebob3/TetrisMC",
+		"issues": "https://github.com/Nukebob3/TetrisMC/issues"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/pixelarcade/icon.png",
+	"icon": "assets/tetrismc/icon.png",
 	"environment": "client",
 	"entrypoints": {
 		"client": [
-			"net.nukebob.PixelArcade"
+			"net.nukebob.TetrisMC"
 		],
 		"modmenu": [
 			"net.nukebob.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [
-		"pixelarcade.mixins.json"
+		"tetrismc.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.7",
@@ -38,8 +38,8 @@
 	"custom": {
 		"modmenu": {
 			"links": {
-				"modmenu.discord": "https://discord.gg/FddwMasb",
-				"modmenu.youtube": "https://www.youtube.com/nukebob3",
+				"modmenu.discord": "https://discord.gg/MZ9bzbYzxA",
+				"modmenu.youtube": "https://www.youtube.com/nukebob3"
 			},
 			"update_checker": true
 		}

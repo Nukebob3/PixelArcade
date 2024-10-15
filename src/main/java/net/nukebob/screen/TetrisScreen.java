@@ -12,7 +12,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
-import net.nukebob.PixelArcade;
+import net.nukebob.TetrisMC;
 import net.nukebob.config.ConfigManager;
 import net.nukebob.game.HighScoreManager;
 import net.nukebob.game.tetris.Animation;
@@ -71,7 +71,7 @@ public class TetrisScreen extends Screen {
         this.init();
     }
 
-    ButtonWidget playButton = ButtonWidget.builder(Text.translatable("pixelarcade:game.start").withColor(Colors.YELLOW), button -> reset()).build();
+    ButtonWidget playButton = ButtonWidget.builder(Text.translatable(TetrisMC.MOD_ID + ":game.start").withColor(Colors.YELLOW), button -> reset()).build();
 
     @Override
     protected void init() {
@@ -86,16 +86,16 @@ public class TetrisScreen extends Screen {
         hardDrop = ConfigManager.loadConfig().tetris_hard_drop;
 
         ButtonWidget returnButton = TextIconButtonWidget.builder(Text.empty(), button -> this.client.setScreen(this.parent), true)
-                .texture(Identifier.of(PixelArcade.MOD_ID, "icon/return"), 15, 15).build();
-        returnButton.setTooltip(Tooltip.of(Text.translatable("pixelarcade:game.return")));
+                .texture(Identifier.of(TetrisMC.MOD_ID, "icon/return"), 15, 15).build();
+        returnButton.setTooltip(Tooltip.of(Text.translatable(TetrisMC.MOD_ID + ":game.return")));
         returnButton.setDimensionsAndPosition(20, 20, 20, 20);
         ButtonWidget restartButton = TextIconButtonWidget.builder(Text.empty(), button -> gameOver(), true)
-                .texture(Identifier.of(PixelArcade.MOD_ID, "icon/restart"), 15, 15).build();
-        restartButton.setTooltip(Tooltip.of(Text.translatable("pixelarcade:game.restart")));
+                .texture(Identifier.of(TetrisMC.MOD_ID, "icon/restart"), 15, 15).build();
+        restartButton.setTooltip(Tooltip.of(Text.translatable(TetrisMC.MOD_ID + ":game.restart")));
         restartButton.setDimensionsAndPosition(20, 20, 45, 20);
         ButtonWidget pauseButton = TextIconButtonWidget.builder(Text.empty(), button -> paused = !paused, true)
-                .texture(Identifier.of(PixelArcade.MOD_ID, "icon/pause"), 15, 15).build();
-        pauseButton.setTooltip(Tooltip.of(Text.translatable("pixelarcade:game.pause")));
+                .texture(Identifier.of(TetrisMC.MOD_ID, "icon/pause"), 15, 15).build();
+        pauseButton.setTooltip(Tooltip.of(Text.translatable(TetrisMC.MOD_ID + ":game.pause")));
         pauseButton.setDimensionsAndPosition(20, 20, 70, 20);
 
         playButton.setPosition(this.width / 2 - 150 / 2, this.height / 2 - 20 / 2);
@@ -160,7 +160,7 @@ public class TetrisScreen extends Screen {
             if (lines > 0) {
                 combo++;
                 if (combo > 1) {
-                    onScreenText = Text.translatable("pixelarcade:tetris.combo").append(" x"+combo);
+                    onScreenText = Text.translatable(TetrisMC.MOD_ID + ":tetris.combo").append(" x"+combo);
                     onScreenTextOpacity = 30;
                     onScreenTextColour = (combo > 3 ? Colors.RED : (combo > 2 ? Colors.YELLOW : Colors.WHITE));
                     score += 50 * (combo - 1);
@@ -173,7 +173,7 @@ public class TetrisScreen extends Screen {
                 case 4: score += 800;
                     MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("entity.generic.explode")), 0.8F, 5.0f * ConfigManager.loadConfig().tetris_volume));
                     animations.add(new Animation(this.width/2 - width/2, currentMino.b[2].y, width, height, "explosion", 20));
-                    onScreenText = Text.translatable("pixelarcade:tetris.tetris");
+                    onScreenText = Text.translatable(TetrisMC.MOD_ID + ":tetris.tetris");
                     onScreenTextColour = 11141290;
                     onScreenTextOpacity = 30;
                     break;
@@ -282,16 +282,16 @@ public class TetrisScreen extends Screen {
 
         //draw next mino
         context.drawBorder(right_x + Block.SIZE - 1, bottom_y - nextHEIGHT + 1, nextWIDTH + 2, nextHEIGHT, Colors.WHITE);
-        Text nextText = Text.translatable("pixelarcade:tetris.next");
+        Text nextText = Text.translatable(TetrisMC.MOD_ID + ":tetris.next");
         context.drawText(this.textRenderer, nextText, right_x + Block.SIZE * 2,
                 bottom_y - nextHEIGHT + Block.SIZE/2, Colors.WHITE, true);
         if (nextMino!= null) nextMino.draw(context);
 
         //draw score
-        Text scoreText = Text.translatable("pixelarcade:tetris.score").append(": " + score);
+        Text scoreText = Text.translatable(TetrisMC.MOD_ID + ":tetris.score").append(": " + score);
         context.drawText(this.textRenderer, scoreText, right_x + Block.SIZE * 2,
                 top_y + Block.SIZE, Colors.WHITE, true);
-        Text linesText = Text.translatable("pixelarcade:tetris.lines").append(": " + linesCleared);
+        Text linesText = Text.translatable(TetrisMC.MOD_ID + ":tetris.lines").append(": " + linesCleared);
         context.drawText(this.textRenderer, linesText, right_x + Block.SIZE * 2,
                 top_y + Block.SIZE + 10, Colors.WHITE, true);
 
@@ -316,7 +316,7 @@ public class TetrisScreen extends Screen {
         animations.removeIf(an -> an.frame > an.frames);
 
         //draw paused text
-        Text pausedText = Text.translatable("pixelarcade:tetris.paused");
+        Text pausedText = Text.translatable(TetrisMC.MOD_ID + ":tetris.paused");
         if (paused) context.drawText(this.textRenderer, pausedText, this.width / 2 - (3 * pausedText.getString().length()),
                 this.height / 2 - 7, Colors.WHITE, true);
         
@@ -337,10 +337,10 @@ public class TetrisScreen extends Screen {
         if (!active) {
             super.render(context, mouseX, mouseY, delta);
             if (currentMino != null) {
-                Text finalScoreText = Text.translatable("pixelarcade:tetris.score").append(": " + score).withColor(Colors.LIGHT_YELLOW);
+                Text finalScoreText = Text.translatable(TetrisMC.MOD_ID + ":tetris.score").append(": " + score).withColor(Colors.LIGHT_YELLOW);
                 context.drawText(this.textRenderer, finalScoreText, this.width / 2 - (finalScoreText.getString().length() * 3),
                         this.height / 2 - 35, Colors.WHITE, true);
-                Text linesClearedText = Text.translatable("pixelarcade:tetris.lines").append(": " + linesCleared).withColor(Colors.LIGHT_YELLOW);
+                Text linesClearedText = Text.translatable(TetrisMC.MOD_ID + ":tetris.lines").append(": " + linesCleared).withColor(Colors.LIGHT_YELLOW);
                 context.drawText(this.textRenderer, linesClearedText, this.width / 2 - (linesClearedText.getString().length() * 3),
                         this.height / 2 - 25, Colors.WHITE, true);
                 HighScoreManager.loadHighScores();
@@ -349,7 +349,7 @@ public class TetrisScreen extends Screen {
                     HighScoreManager.loadHighScores().tetrisHighScore = score;
                     HighScoreManager.saveHighScores();
                 }
-                highScoreClearedText = Text.translatable(isNewHighScore ? "pixelarcade:tetris.new_high_score" : "pixelarcade:tetris.high_score").append(": " + HighScoreManager.loadHighScores().tetrisHighScore).withColor(Colors.YELLOW);
+                highScoreClearedText = Text.translatable(isNewHighScore ? TetrisMC.MOD_ID + ":tetris.new_high_score" : TetrisMC.MOD_ID + ":tetris.high_score").append(": " + HighScoreManager.loadHighScores().tetrisHighScore).withColor(Colors.YELLOW);
                 if (HighScoreManager.loadHighScores().tetrisHighScore > 0) context.drawText(this.textRenderer, highScoreClearedText, this.width / 2 - (highScoreClearedText.getString().length() * 3),
                         this.height / 2 + 25, Colors.WHITE, true);
             }
