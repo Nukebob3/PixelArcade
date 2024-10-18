@@ -13,7 +13,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import net.nukebob.config.ConfigManager;
+import net.nukebob.config.TetrisConfig;
 import net.nukebob.game.tetris.HardDropAnimation;
 import net.nukebob.screen.TetrisScreen;
 import net.nukebob.util.TextureResource;
@@ -31,6 +31,8 @@ public class Mino {
     public int direction = 1;
     boolean leftCollision, rightCollision, bottomCollision;
     public boolean active = true;
+
+    private final TetrisConfig config = TetrisConfig.loadConfig();
 
     public Mino() {
         TextureResource randomBlockTexture = getRandomBlockTexture();
@@ -69,7 +71,7 @@ public class Mino {
         b[2].y = tempB[2].y;
         b[3].x = tempB[3].x;
         b[3].y = tempB[3].y;
-        MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.wooden_button.click_on")), 2.0F, ConfigManager.loadConfig().tetris_volume));
+        MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.wooden_button.click_on")), 2.0F, config.tetris_volume));
     }
     public void getDirection1() {}
     public void getDirection2() {}
@@ -178,7 +180,7 @@ public class Mino {
                     }
                 }
                 if (proceed) {
-                    MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.wooden_button.click_on")), 2.0F,  ConfigManager.loadConfig().tetris_volume));
+                    MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.wooden_button.click_on")), 2.0F,  config.tetris_volume));
                     for (Block block : b) {
                         block.x -= Block.SIZE;
                     }
@@ -203,7 +205,7 @@ public class Mino {
                     }
                 }
                 if (proceed) {
-                    MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.wooden_button.click_on")), 2.0F,  ConfigManager.loadConfig().tetris_volume));
+                    MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.wooden_button.click_on")), 2.0F,  config.tetris_volume));
                     for (Block block : b) {
                         block.x += Block.SIZE;
                     }
@@ -234,7 +236,7 @@ public class Mino {
                     }
                 }
                 if (proceed) {
-                    MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.wooden_button.click_on")), 2.0F, ConfigManager.loadConfig().tetris_volume));
+                    MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.wooden_button.click_on")), 2.0F, config.tetris_volume));
                     for (Block block : b) {
                         block.y += Block.SIZE;
                     }
@@ -245,7 +247,7 @@ public class Mino {
             TetrisScreen.downPressed = false;
         }
         if (TetrisScreen.spacePressed && TetrisScreen.hardDrop > 0) {
-            MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("entity.wind_charge.wind_burst")), 1.0F,  ConfigManager.loadConfig().tetris_volume));
+            MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("entity.wind_charge.wind_burst")), 1.0F,  config.tetris_volume / 2));
             int drop = getDropOffset();
             TetrisScreen.animations.add(new HardDropAnimation(b[0].x, b[0].y, 27, drop, 10));
             b[0].y += drop;

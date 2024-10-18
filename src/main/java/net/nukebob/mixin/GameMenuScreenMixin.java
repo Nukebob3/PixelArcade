@@ -7,7 +7,7 @@ import net.minecraft.client.gui.widget.TextIconButtonWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.nukebob.TetrisMC;
-import net.nukebob.config.ConfigManager;
+import net.nukebob.config.TetrisConfig;
 import net.nukebob.screen.TetrisScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,7 +23,7 @@ public abstract class GameMenuScreenMixin extends Screen {
     @Inject(at = @At("RETURN"), method = "initWidgets")
     private void addMinigameButton(CallbackInfo ci) {
         TextIconButtonWidget textIconButtonWidget = TextIconButtonWidget.builder(Text.empty(), (button) -> this.client.setScreen(new TetrisScreen(this)), true).width(20).texture(Identifier.of(TetrisMC.MOD_ID, "icon/button"), 16, 16).build();
-        textIconButtonWidget.setPosition(this.width / 2 - 100 + 205, 50);
+        textIconButtonWidget.setPosition(this.width / 2 - 100 + 204, 50);
 
         for (ButtonWidget button : this.children().stream().filter(e -> e instanceof ButtonWidget).map(e -> (ButtonWidget) e).toList()) {
             if (button.getMessage().equals(Text.translatable("menu.returnToGame"))) {
@@ -35,6 +35,6 @@ public abstract class GameMenuScreenMixin extends Screen {
             }
         }
 
-        if (ConfigManager.loadConfig().mod_enabled) this.addDrawableChild(textIconButtonWidget);
+        if (TetrisConfig.loadConfig().mod_enabled) this.addDrawableChild(textIconButtonWidget);
     }
 }

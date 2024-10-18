@@ -13,8 +13,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import net.nukebob.TetrisMC;
-import net.nukebob.config.ConfigManager;
-import net.nukebob.game.HighScoreManager;
+import net.nukebob.config.TetrisConfig;
+import net.nukebob.game.HighScores;
 import net.nukebob.game.tetris.Animation;
 import net.nukebob.game.tetris.mino.*;
 
@@ -64,6 +64,8 @@ public class TetrisScreen extends Screen {
     public static Mino currentMino;
     public static Mino nextMino;
 
+    private final TetrisConfig config = TetrisConfig.loadConfig();
+
     public TetrisScreen(Screen parent) {
         super(Text.of("Tetris Screen"));
         this.parent = parent;
@@ -83,7 +85,7 @@ public class TetrisScreen extends Screen {
 
         paused = true;
 
-        hardDrop = ConfigManager.loadConfig().tetris_hard_drop;
+        hardDrop = config.tetris_hard_drop;
 
         ButtonWidget returnButton = TextIconButtonWidget.builder(Text.empty(), button -> this.client.setScreen(this.parent), true)
                 .texture(Identifier.of(TetrisMC.MOD_ID, "icon/return"), 15, 15).build();
@@ -137,12 +139,11 @@ public class TetrisScreen extends Screen {
     }
 
     public void manager() {
-        hardDrop = ConfigManager.loadConfig().tetris_hard_drop;
         if (currentMino == null) {
             reset();
         }
         if (!currentMino.active) {
-            MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.stone.place")), 1.5F, 5.0f * ConfigManager.loadConfig().tetris_volume));
+            MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.stone.place")), 1.5F, 5.0f * config.tetris_volume));
             score += 10;
 
             staticBlocks.add(currentMino.b[0]);
@@ -171,7 +172,7 @@ public class TetrisScreen extends Screen {
                 case 2: score += 300; break;
                 case 3: score += 500; break;
                 case 4: score += 800;
-                    MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("entity.generic.explode")), 0.8F, 5.0f * ConfigManager.loadConfig().tetris_volume));
+                    MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("entity.generic.explode")), 0.8F, 5.0f * config.tetris_volume));
                     animations.add(new Animation(this.width/2 - width/2, currentMino.b[2].y, width, height, "explosion", 20));
                     onScreenText = Text.translatable(TetrisMC.MOD_ID + ":tetris.tetris");
                     onScreenTextColour = 11141290;
@@ -212,8 +213,8 @@ public class TetrisScreen extends Screen {
     }
 
     private void gameOver() {
-        MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("entity.pig.ambient")), 1.0F, 5.0f * ConfigManager.loadConfig().tetris_volume));
-        isNewHighScore = score > HighScoreManager.loadHighScores().tetrisHighScore;
+        MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("entity.pig.ambient")), 1.0F, 5.0f * config.tetris_volume));
+        isNewHighScore = score > HighScores.loadHighScores().tetrisHighScore;
         active = false;
     }
 
@@ -225,7 +226,7 @@ public class TetrisScreen extends Screen {
         if (count < gridX) {
             return false;
         }
-        MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.deepslate.break")), 1.0F, 5.0f * ConfigManager.loadConfig().tetris_volume));
+        MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvent.of(Identifier.ofVanilla("block.deepslate.break")), 1.0F, 5.0f * config.tetris_volume));
         linesCleared++;
         for (Block block : staticBlocks) {
             if (block.y == y) {
@@ -348,14 +349,14 @@ public class TetrisScreen extends Screen {
                 Text linesClearedText = Text.translatable(TetrisMC.MOD_ID + ":tetris.lines").append(": " + linesCleared).withColor(Colors.LIGHT_YELLOW);
                 context.drawText(this.textRenderer, linesClearedText, this.width / 2 - (linesClearedText.getString().length() * 3),
                         this.height / 2 - 25, Colors.WHITE, true);
-                HighScoreManager.loadHighScores();
+                HighScores.loadHighScores();
                 Text highScoreClearedText;
-                if (score > HighScoreManager.loadHighScores().tetrisHighScore) {
-                    HighScoreManager.loadHighScores().tetrisHighScore = score;
-                    HighScoreManager.saveHighScores();
+                if (score > HighScores.loadHighScores().tetrisHighScore) {
+                    HighScores.loadHighScores().tetrisHighScore = score;
+                    HighScores.saveHighScores();
                 }
-                highScoreClearedText = Text.translatable(isNewHighScore ? TetrisMC.MOD_ID + ":tetris.new_high_score" : TetrisMC.MOD_ID + ":tetris.high_score").append(": " + HighScoreManager.loadHighScores().tetrisHighScore).withColor(Colors.YELLOW);
-                if (HighScoreManager.loadHighScores().tetrisHighScore > 0) context.drawText(this.textRenderer, highScoreClearedText, this.width / 2 - (highScoreClearedText.getString().length() * 3),
+                highScoreClearedText = Text.translatable(isNewHighScore ? TetrisMC.MOD_ID + ":tetris.new_high_score" : TetrisMC.MOD_ID + ":tetris.high_score").append(": " + HighScores.loadHighScores().tetrisHighScore).withColor(Colors.YELLOW);
+                if (HighScores.loadHighScores().tetrisHighScore > 0) context.drawText(this.textRenderer, highScoreClearedText, this.width / 2 - (highScoreClearedText.getString().length() * 3),
                         this.height / 2 + 25, Colors.WHITE, true);
             }
         }

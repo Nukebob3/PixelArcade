@@ -13,7 +13,7 @@ public class ConfigScreen extends Screen {
 
     private final Screen parent;
 
-    Config config = ConfigManager.loadConfig();
+    TetrisConfig config = TetrisConfig.loadConfig();
 
     int enableColour = 8781731;
     int disableColour = 16745861;
@@ -33,7 +33,7 @@ public class ConfigScreen extends Screen {
 
         ButtonWidget toggleModEnabledWidget = ButtonWidget.builder(Text.translatable(TetrisMC.MOD_ID + ":config.mod").append(" ").append(Text.translatable(TetrisMC.MOD_ID + ":config." + (config.mod_enabled ? "enabled" : "disabled"))).withColor(config.mod_enabled ? Colors.GREEN : Colors.RED), this::toggleModEnabled)
                 .dimensions(centerX - buttonWidth / 2, centerY - 45, buttonWidth, buttonHeight).build();
-        ButtonWidget hardDropSettingsWidget = ButtonWidget.builder(Text.translatable(TetrisMC.MOD_ID + ":tetris.hard_drop").append(": ").append(Text.translatable(config.tetris_hard_drop == 0 ? TetrisMC.MOD_ID + ":config.disabled" : TetrisMC.MOD_ID + ":tetris.hard_drop." + (config.tetris_hard_drop == 1 ? "previewless" : (config.tetris_hard_drop == 2 ? "outline" : "hologram")))).withColor((config.tetris_hard_drop != 0) ? enableColour : disableColour), button -> {config.tetris_hard_drop++; if (config.tetris_hard_drop > 3) config.tetris_hard_drop = 0; button.setMessage(Text.translatable(TetrisMC.MOD_ID + ":tetris.hard_drop").append(": ").append(Text.translatable(config.tetris_hard_drop == 0 ? TetrisMC.MOD_ID + ":config.disabled" : TetrisMC.MOD_ID + ":tetris.hard_drop." + (config.tetris_hard_drop == 1 ? "previewless" : (config.tetris_hard_drop == 2 ? "outline" : "hologram")))).withColor((config.tetris_hard_drop != 0) ? enableColour : disableColour)); ConfigManager.saveConfig();})
+        ButtonWidget hardDropSettingsWidget = ButtonWidget.builder(Text.translatable(TetrisMC.MOD_ID + ":tetris.hard_drop").append(": ").append(Text.translatable(config.tetris_hard_drop == 0 ? TetrisMC.MOD_ID + ":config.disabled" : TetrisMC.MOD_ID + ":tetris.hard_drop." + (config.tetris_hard_drop == 1 ? "previewless" : (config.tetris_hard_drop == 2 ? "outline" : "hologram")))).withColor((config.tetris_hard_drop != 0) ? enableColour : disableColour), button -> {config.tetris_hard_drop++; if (config.tetris_hard_drop > 3) config.tetris_hard_drop = 0; button.setMessage(Text.translatable(TetrisMC.MOD_ID + ":tetris.hard_drop").append(": ").append(Text.translatable(config.tetris_hard_drop == 0 ? TetrisMC.MOD_ID + ":config.disabled" : TetrisMC.MOD_ID + ":tetris.hard_drop." + (config.tetris_hard_drop == 1 ? "previewless" : (config.tetris_hard_drop == 2 ? "outline" : "hologram")))).withColor((config.tetris_hard_drop != 0) ? enableColour : disableColour)); TetrisConfig.saveConfig();})
                 .dimensions(centerX - buttonWidth / 2, centerY - 20, buttonWidth, buttonHeight).build();
         SliderWidget volumeSlider = new SliderWidget(centerX - buttonWidth / 2, centerY, buttonWidth, buttonHeight,
                 Text.translatable(TetrisMC.MOD_ID + ":config.volume"), config.tetris_volume) {
@@ -48,7 +48,7 @@ public class ConfigScreen extends Screen {
             @Override
             protected void applyValue() {
                 config.tetris_volume = (float) this.value;
-                ConfigManager.saveConfig();
+                TetrisConfig.saveConfig();
             }
         };
 
@@ -66,7 +66,7 @@ public class ConfigScreen extends Screen {
     private void toggleModEnabled(ButtonWidget buttonWidget) {
         config.mod_enabled = !config.mod_enabled;
         buttonWidget.setMessage(Text.translatable(TetrisMC.MOD_ID + ":config.mod").append(" ").append(Text.translatable(TetrisMC.MOD_ID + ":config." + (config.mod_enabled ? "enabled" : "disabled"))).withColor(config.mod_enabled ? Colors.GREEN : Colors.RED));
-        ConfigManager.saveConfig();
+        TetrisConfig.saveConfig();
     }
 
     private void closeScreen() {
