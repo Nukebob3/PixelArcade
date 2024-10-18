@@ -1,7 +1,8 @@
-package net.nukebob.config;
+package net.nukebob.config.tetrismc;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.minecraft.client.MinecraftClient;
 import net.nukebob.TetrisMC;
 
 import java.io.File;
@@ -9,18 +10,22 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ConfigManager {
+public class TetrisConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final File CONFIG_FILE = new File("config/" + TetrisMC.MOD_ID + ".json");
-    private static Config config;
+    private static final File CONFIG_FILE = new File(MinecraftClient.getInstance().runDirectory + "/config/" + TetrisMC.MOD_ID + "/config.json");
+    private static TetrisConfig config;
 
-    public static Config loadConfig() {
+    public boolean mod_enabled = true;
+    public int tetris_hard_drop = 1;
+    public float tetris_volume = 1.0f;
+
+    public static TetrisConfig loadConfig() {
         if (!CONFIG_FILE.exists()) {
-            config = new Config();
+            config = new TetrisConfig();
             saveConfig();
         } else {
             try (FileReader reader = new FileReader(CONFIG_FILE)) {
-                config = GSON.fromJson(reader, Config.class);
+                config = GSON.fromJson(reader, TetrisConfig.class);
             } catch (IOException e) {
                 TetrisMC.LOGGER.error("Could not load config file", e);
             }

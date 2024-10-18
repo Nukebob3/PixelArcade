@@ -1,4 +1,4 @@
-package net.nukebob.config;
+package net.nukebob.config.tetrismc;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

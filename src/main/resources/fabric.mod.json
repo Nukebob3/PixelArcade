@@ -20,7 +20,7 @@
 			"net.nukebob.TetrisMC"
 		],
 		"modmenu": [
-			"net.nukebob.config.ModMenuIntegration"
+          "net.nukebob.config.tetrismc.ModMenuIntegration"
 		]
 	},
 	"mixins": [
