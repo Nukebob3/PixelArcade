@@ -1,4 +1,4 @@
-package net.nukebob;
+package net.nukebob.tetrismc;
 
 import net.fabricmc.api.ClientModInitializer;
 

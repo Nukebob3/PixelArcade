@@ -1,8 +1,8 @@
-package net.nukebob.game.tetris;
+package net.nukebob.tetrismc.game.tetris;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
-import net.nukebob.TetrisMC;
+import net.nukebob.tetrismc.TetrisMC;
 
 public class Animation {
     public int x;

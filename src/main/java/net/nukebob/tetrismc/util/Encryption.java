@@ -1,4 +1,4 @@
-package net.nukebob.util;
+package net.nukebob.tetrismc.util;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;

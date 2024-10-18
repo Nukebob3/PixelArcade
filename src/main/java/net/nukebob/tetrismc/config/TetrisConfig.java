@@ -1,9 +1,9 @@
-package net.nukebob.config.tetrismc;
+package net.nukebob.tetrismc.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.client.MinecraftClient;
-import net.nukebob.TetrisMC;
+import net.nukebob.tetrismc.TetrisMC;
 
 import java.io.File;
 import java.io.FileReader;

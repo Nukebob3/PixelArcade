@@ -1,4 +1,4 @@
-package net.nukebob.game.tetris.mino;
+package net.nukebob.tetrismc.game.tetris.mino;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.block.BlockState;
@@ -13,10 +13,10 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import net.nukebob.config.tetrismc.TetrisConfig;
-import net.nukebob.game.tetris.HardDropAnimation;
-import net.nukebob.screen.TetrisScreen;
-import net.nukebob.util.TextureResource;
+import net.nukebob.tetrismc.config.TetrisConfig;
+import net.nukebob.tetrismc.game.tetris.HardDropAnimation;
+import net.nukebob.tetrismc.screen.TetrisScreen;
+import net.nukebob.tetrismc.util.TextureResource;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

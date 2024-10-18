@@ -1,10 +1,10 @@
-package net.nukebob.game.tetris.mino;
+package net.nukebob.tetrismc.game.tetris.mino;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
-import net.nukebob.screen.TetrisScreen;
+import net.nukebob.tetrismc.screen.TetrisScreen;
 
 public class Block {
     public int x, y;

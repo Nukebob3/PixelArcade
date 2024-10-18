@@ -1,4 +1,4 @@
-package net.nukebob.util;
+package net.nukebob.tetrismc.util;
 
 import net.minecraft.util.Identifier;
 

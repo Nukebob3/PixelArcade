@@ -1,4 +1,4 @@
-package net.nukebob.screen;
+package net.nukebob.tetrismc.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
@@ -12,11 +12,11 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
-import net.nukebob.TetrisMC;
-import net.nukebob.config.tetrismc.TetrisConfig;
-import net.nukebob.game.HighScores;
-import net.nukebob.game.tetris.Animation;
-import net.nukebob.game.tetris.mino.*;
+import net.nukebob.tetrismc.TetrisMC;
+import net.nukebob.tetrismc.config.TetrisConfig;
+import net.nukebob.tetrismc.game.HighScores;
+import net.nukebob.tetrismc.game.tetris.Animation;
+import net.nukebob.tetrismc.game.tetris.mino.*;
 
 import java.util.ArrayList;
 import java.util.Random;

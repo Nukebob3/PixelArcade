@@ -1,13 +1,13 @@
-package net.nukebob.mixin;
+package net.nukebob.tetrismc.mixin;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.widget.TextIconButtonWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.nukebob.TetrisMC;
-import net.nukebob.config.tetrismc.TetrisConfig;
-import net.nukebob.screen.TetrisScreen;
+import net.nukebob.tetrismc.TetrisMC;
+import net.nukebob.tetrismc.config.TetrisConfig;
+import net.nukebob.tetrismc.screen.TetrisScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

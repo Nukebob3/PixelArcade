@@ -1,11 +1,11 @@
-package net.nukebob.game.tetris;
+package net.nukebob.tetrismc.game.tetris;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
-import net.nukebob.TetrisMC;
-import net.nukebob.game.tetris.mino.Block;
-import net.nukebob.screen.TetrisScreen;
+import net.nukebob.tetrismc.TetrisMC;
+import net.nukebob.tetrismc.game.tetris.mino.Block;
+import net.nukebob.tetrismc.screen.TetrisScreen;
 
 public class HardDropAnimation extends Animation{
     public HardDropAnimation(int x, int y, int width, int height, int frames) {

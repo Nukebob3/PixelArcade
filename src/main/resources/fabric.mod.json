@@ -17,10 +17,10 @@
 	"environment": "client",
 	"entrypoints": {
 		"client": [
-			"net.nukebob.TetrisMC"
+			"net.nukebob.tetrismc.TetrisMC"
 		],
 		"modmenu": [
-          "net.nukebob.config.tetrismc.ModMenuIntegration"
+          "net.nukebob.tetrismc.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [

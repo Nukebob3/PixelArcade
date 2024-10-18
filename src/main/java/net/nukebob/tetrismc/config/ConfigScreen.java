@@ -1,4 +1,4 @@
-package net.nukebob.config.tetrismc;
+package net.nukebob.tetrismc.config;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -6,7 +6,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.SliderWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Colors;
-import net.nukebob.TetrisMC;
+import net.nukebob.tetrismc.TetrisMC;
 
 public class ConfigScreen extends Screen {
     public static boolean texturepackEnabled;

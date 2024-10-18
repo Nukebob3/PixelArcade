@@ -1,4 +1,4 @@
-package net.nukebob.game.tetris.mino;
+package net.nukebob.tetrismc.game.tetris.mino;
 
 public class Mino_Square extends Mino{
     public void setXY(int x, int y) {
