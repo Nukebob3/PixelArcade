@@ -85,21 +85,21 @@ public class Mino {
         // check frame collision
         //left wall
         for (Block block : b) {
-            if (block.x == 0) {
+            if (block.x - Block.SIZE < 0) {
                 leftCollision = true;
                 break;
             }
         }
         //right wall
-        for (Block value : b) {
-            if (value.x + Block.SIZE == TetrisScreen.WIDTH) {
+        for (Block block : b) {
+            if (block.x + Block.SIZE >= TetrisScreen.WIDTH) {
                 rightCollision = true;
                 break;
             }
         }
         //bottom floor
         for (Block block : b) {
-            if (block.y + Block.SIZE == TetrisScreen.HEIGHT) {
+            if (block.y + Block.SIZE >= TetrisScreen.HEIGHT) {
                 bottomCollision = true;
                 break;
             }
@@ -161,17 +161,8 @@ public class Mino {
     }
     public void update(float timePassed) {
         checkMovementCollision();
-
-        if (TetrisScreen.upPressed) {
-            switch (direction) {
-                case 1: getDirection2(); break;
-                case 2: getDirection3(); break;
-                case 3: getDirection4(); break;
-                case 4: getDirection1(); break;
-            }
-            TetrisScreen.upPressed = false;
-        }
         if (TetrisScreen.leftPressed) {
+            checkMovementCollision();
             if (!leftCollision) {
                 boolean proceed = true;
                 for (Block block : b) {
@@ -180,6 +171,10 @@ public class Mino {
                             proceed = false;
                             break;
                         }
+                    }
+                    if (block.x - Block.SIZE < 0) {
+                        proceed = false;
+                        break;
                     }
                 }
                 if (proceed) {
@@ -192,6 +187,7 @@ public class Mino {
             TetrisScreen.leftPressed = false;
         }
         if (TetrisScreen.rightPressed) {
+            checkMovementCollision();
             if (!rightCollision) {
                 boolean proceed = true;
                 for (Block block : b) {
@@ -200,6 +196,10 @@ public class Mino {
                             proceed = false;
                             break;
                         }
+                    }
+                    if (block.x + Block.SIZE > TetrisScreen.WIDTH) {
+                        proceed = false;
+                        break;
                     }
                 }
                 if (proceed) {
@@ -210,6 +210,15 @@ public class Mino {
                 }
             }
             TetrisScreen.rightPressed = false;
+        }
+        if (TetrisScreen.upPressed) {
+            switch (direction) {
+                case 1: getDirection2(); break;
+                case 2: getDirection3(); break;
+                case 3: getDirection4(); break;
+                case 4: getDirection1(); break;
+            }
+            TetrisScreen.upPressed = false;
         }
         if (TetrisScreen.downPressed) {
             if (bottomCollision) {
