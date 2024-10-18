@@ -21,6 +21,7 @@ public class TetrisConfig {
 
     public static TetrisConfig loadConfig() {
         if (!CONFIG_FILE.exists()) {
+            CONFIG_FILE.mkdirs();
             config = new TetrisConfig();
             saveConfig();
         } else {
