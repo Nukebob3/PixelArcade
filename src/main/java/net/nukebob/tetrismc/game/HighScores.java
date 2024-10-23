@@ -19,7 +19,7 @@ public class HighScores {
     public static HighScores loadHighScores() {
         if (!HIGH_SCORES_FILE.exists()) {
             highScores = new HighScores();
-            saveHighScores(); // Save initially with an empty high score list
+            saveHighScores();
         } else {
             try (FileReader reader = new FileReader(HIGH_SCORES_FILE)) {
                 char[] buffer = new char[(int) HIGH_SCORES_FILE.length()];
@@ -39,6 +39,9 @@ public class HighScores {
     }
 
     public static void saveHighScores() {
+        if (!HIGH_SCORES_FILE.getParentFile().exists()) {
+            HIGH_SCORES_FILE.getParentFile().mkdirs();
+        }
         try (FileWriter writer = new FileWriter(HIGH_SCORES_FILE)) {
             String jsonContent = GSON.toJson(highScores);
 

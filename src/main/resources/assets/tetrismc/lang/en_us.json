@@ -8,6 +8,7 @@
   "tetrismc:config.music": "Music",
 
   "tetrismc:tetris.hard_drop": "Hard drop",
+  "tetrismc:tetris.random_texture": "Random Textures",
   "tetrismc:tetris.hard_drop.previewless": "No preview",
   "tetrismc:tetris.hard_drop.hologram": "Hologram",
   "tetrismc:tetris.hard_drop.outline": "Outline",

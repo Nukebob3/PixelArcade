@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class Mino {
+public abstract class Mino {
     public Block[] b = new Block[4];
     public Block[] tempB = new Block[4];
     float dropCounter = 0;
@@ -40,21 +40,39 @@ public class Mino {
     }
 
     public void create(Identifier t, int textureWidth, int textureHeight) {
-        b[0] = new Block(t, textureWidth, textureHeight);
-        b[1] = new Block(t, textureWidth, textureHeight);
-        b[2] = new Block(t, textureWidth, textureHeight);
-        b[3] = new Block(t, textureWidth, textureHeight);
-        tempB[0] = new Block(t, textureWidth, textureHeight);
-        tempB[1] = new Block(t, textureWidth, textureHeight);
-        tempB[2] = new Block(t, textureWidth, textureHeight);
-        tempB[3] = new Block(t, textureWidth, textureHeight);
+        b[0] = new Block(t, textureWidth, textureHeight, this);
+        b[1] = new Block(t, textureWidth, textureHeight, this);
+        b[2] = new Block(t, textureWidth, textureHeight, this);
+        b[3] = new Block(t, textureWidth, textureHeight, this);
+        tempB[0] = new Block(t, textureWidth, textureHeight, this);
+        tempB[1] = new Block(t, textureWidth, textureHeight, this);
+        tempB[2] = new Block(t, textureWidth, textureHeight, this);
+        tempB[3] = new Block(t, textureWidth, textureHeight, this);
     }
 
     public void setXY (int x, int y) {}
     public void updateXY (int direction) {
         for (Block b : tempB) {
-            if (b.x < 0) return;
-            if (b.x > TetrisScreen.WIDTH - Block.SIZE) return;
+            if (b.x < 0) {
+                for (Block sB : TetrisScreen.staticBlocks) {
+                    if (sB.x == b.x + Block.SIZE && sB.y == b.y) {
+                        return;
+                    }
+                }
+                for (Block block : tempB) {
+                    block.x += Block.SIZE;
+                }
+            }
+            if (b.x > TetrisScreen.WIDTH - Block.SIZE) {
+                for (Block sB : TetrisScreen.staticBlocks) {
+                    if (sB.x == b.x && sB.y == b.y) {
+                        return;
+                    }
+                }
+                for (Block block : tempB) {
+                    block.x -= Block.SIZE;
+                }
+            }
             if (b.y > TetrisScreen.HEIGHT - Block.SIZE) return;
             for (Block sB : TetrisScreen.staticBlocks) {
                 if (sB.x == b.x && sB.y == b.y) {

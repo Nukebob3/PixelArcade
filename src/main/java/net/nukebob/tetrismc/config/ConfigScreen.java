@@ -35,7 +35,9 @@ public class ConfigScreen extends Screen {
                 .dimensions(centerX - buttonWidth / 2, centerY - 45, buttonWidth, buttonHeight).build();
         ButtonWidget hardDropSettingsWidget = ButtonWidget.builder(Text.translatable(TetrisMC.MOD_ID + ":tetris.hard_drop").append(": ").append(Text.translatable(config.tetris_hard_drop == 0 ? TetrisMC.MOD_ID + ":config.disabled" : TetrisMC.MOD_ID + ":tetris.hard_drop." + (config.tetris_hard_drop == 1 ? "previewless" : (config.tetris_hard_drop == 2 ? "outline" : "hologram")))).withColor((config.tetris_hard_drop != 0) ? enableColour : disableColour), button -> {config.tetris_hard_drop++; if (config.tetris_hard_drop > 3) config.tetris_hard_drop = 0; button.setMessage(Text.translatable(TetrisMC.MOD_ID + ":tetris.hard_drop").append(": ").append(Text.translatable(config.tetris_hard_drop == 0 ? TetrisMC.MOD_ID + ":config.disabled" : TetrisMC.MOD_ID + ":tetris.hard_drop." + (config.tetris_hard_drop == 1 ? "previewless" : (config.tetris_hard_drop == 2 ? "outline" : "hologram")))).withColor((config.tetris_hard_drop != 0) ? enableColour : disableColour)); TetrisConfig.saveConfig();})
                 .dimensions(centerX - buttonWidth / 2, centerY - 20, buttonWidth, buttonHeight).build();
-        SliderWidget volumeSlider = new SliderWidget(centerX - buttonWidth / 2, centerY, buttonWidth, buttonHeight,
+        ButtonWidget randomTextureEnabledWidget = ButtonWidget.builder(Text.translatable(TetrisMC.MOD_ID + ":tetris.random_texture").append(" ").append(Text.translatable(TetrisMC.MOD_ID + ":config." + (config.tetris_random_textures ? "enabled" : "disabled"))).withColor(config.tetris_random_textures ? enableColour : disableColour), this::toggleRandomTextureEnabled)
+                .dimensions(centerX - buttonWidth / 2, centerY, buttonWidth, buttonHeight).build();
+        SliderWidget volumeSlider = new SliderWidget(centerX - buttonWidth / 2, centerY + 20, buttonWidth, buttonHeight,
                 Text.translatable(TetrisMC.MOD_ID + ":config.volume"), config.tetris_volume) {
             {
                 this.updateMessage();
@@ -53,10 +55,11 @@ public class ConfigScreen extends Screen {
         };
 
         ButtonWidget doneButtonWidget = ButtonWidget.builder(Text.translatable(TetrisMC.MOD_ID + ":config.done").withColor(Colors.WHITE), button -> closeScreen())
-                .dimensions(centerX - buttonWidth / 2, centerY + 25, buttonWidth, buttonHeight).build();
+                .dimensions(centerX - buttonWidth / 2, centerY + 45, buttonWidth, buttonHeight).build();
 
         this.addDrawableChild(toggleModEnabledWidget);
         this.addDrawableChild(hardDropSettingsWidget);
+        this.addDrawableChild(randomTextureEnabledWidget);
         this.addDrawableChild(volumeSlider);
         this.addDrawableChild(doneButtonWidget);
 
@@ -66,6 +69,12 @@ public class ConfigScreen extends Screen {
     private void toggleModEnabled(ButtonWidget buttonWidget) {
         config.mod_enabled = !config.mod_enabled;
         buttonWidget.setMessage(Text.translatable(TetrisMC.MOD_ID + ":config.mod").append(" ").append(Text.translatable(TetrisMC.MOD_ID + ":config." + (config.mod_enabled ? "enabled" : "disabled"))).withColor(config.mod_enabled ? Colors.GREEN : Colors.RED));
+        TetrisConfig.saveConfig();
+    }
+
+    private void toggleRandomTextureEnabled(ButtonWidget buttonWidget) {
+        config.tetris_random_textures = !config.tetris_random_textures;
+        buttonWidget.setMessage(Text.translatable(TetrisMC.MOD_ID + ":tetris.random_texture").append(" ").append(Text.translatable(TetrisMC.MOD_ID + ":config." + (config.tetris_random_textures ? "enabled" : "disabled"))).withColor(config.tetris_random_textures ? enableColour : disableColour));
         TetrisConfig.saveConfig();
     }
 

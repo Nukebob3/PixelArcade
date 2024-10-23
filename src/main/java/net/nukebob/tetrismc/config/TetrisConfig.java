@@ -16,12 +16,12 @@ public class TetrisConfig {
     private static TetrisConfig config;
 
     public boolean mod_enabled = true;
+    public boolean tetris_random_textures = true;
     public int tetris_hard_drop = 1;
     public float tetris_volume = 1.0f;
 
     public static TetrisConfig loadConfig() {
         if (!CONFIG_FILE.exists()) {
-            CONFIG_FILE.mkdirs();
             config = new TetrisConfig();
             saveConfig();
         } else {
@@ -35,6 +35,9 @@ public class TetrisConfig {
     }
 
     public static void saveConfig() {
+        if (!CONFIG_FILE.getParentFile().exists()) {
+            CONFIG_FILE.getParentFile().mkdirs();
+        }
         try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
             GSON.toJson(config, writer);
         } catch (IOException e) {
