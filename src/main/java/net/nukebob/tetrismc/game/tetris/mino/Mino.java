@@ -27,6 +27,7 @@ import java.util.Random;
 public abstract class Mino {
     public Block[] b = new Block[4];
     public Block[] tempB = new Block[4];
+    public String type = "";
     float dropCounter = 0;
     public int direction = 1;
     boolean leftCollision, rightCollision, bottomCollision;
@@ -35,19 +36,34 @@ public abstract class Mino {
     private final TetrisConfig config = TetrisConfig.loadConfig();
 
     public Mino() {
+        if (this instanceof Mino_Square) {
+            type = "square";
+        } else if (this instanceof Mino_Bar) {
+            type = "bar";
+        } else if (this instanceof Mino_T) {
+            type = "t";
+        } else if (this instanceof Mino_L1) {
+            type = "l1";
+        } else if (this instanceof Mino_L2) {
+            type = "l2";
+        } else if (this instanceof Mino_Z1) {
+            type = "z1";
+        } else if (this instanceof Mino_Z2) {
+            type = "z2";
+        }
         TextureResource randomBlockTexture = getRandomBlockTexture();
         create(randomBlockTexture.texture, randomBlockTexture.width, randomBlockTexture.height);
     }
 
     public void create(Identifier t, int textureWidth, int textureHeight) {
-        b[0] = new Block(t, textureWidth, textureHeight, this);
-        b[1] = new Block(t, textureWidth, textureHeight, this);
-        b[2] = new Block(t, textureWidth, textureHeight, this);
-        b[3] = new Block(t, textureWidth, textureHeight, this);
-        tempB[0] = new Block(t, textureWidth, textureHeight, this);
-        tempB[1] = new Block(t, textureWidth, textureHeight, this);
-        tempB[2] = new Block(t, textureWidth, textureHeight, this);
-        tempB[3] = new Block(t, textureWidth, textureHeight, this);
+        b[0] = new Block(t, textureWidth, textureHeight, this.type);
+        b[1] = new Block(t, textureWidth, textureHeight, this.type);
+        b[2] = new Block(t, textureWidth, textureHeight, this.type);
+        b[3] = new Block(t, textureWidth, textureHeight, this.type);
+        tempB[0] = new Block(t, textureWidth, textureHeight, this.type);
+        tempB[1] = new Block(t, textureWidth, textureHeight, this.type);
+        tempB[2] = new Block(t, textureWidth, textureHeight, this.type);
+        tempB[3] = new Block(t, textureWidth, textureHeight, this.type);
     }
 
     public void setXY (int x, int y) {}

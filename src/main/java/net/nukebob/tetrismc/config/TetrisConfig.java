@@ -31,6 +31,10 @@ public class TetrisConfig {
                 TetrisMC.LOGGER.error("Could not load config file", e);
             }
         }
+        if (config == null) {
+            config = new TetrisConfig();
+            saveConfig();
+        }
         return config;
     }
 
@@ -38,6 +42,7 @@ public class TetrisConfig {
         if (!CONFIG_FILE.getParentFile().exists()) {
             CONFIG_FILE.getParentFile().mkdirs();
         }
+
         try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
             GSON.toJson(config, writer);
         } catch (IOException e) {

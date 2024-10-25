@@ -11,12 +11,12 @@ public class Block {
     public int x, y;
     public static int SIZE = 16;
     public Identifier texture;
-    public Mino mino;
+    public String mino;
     public int textureWidth;
     public int textureHeight;
     public int destroying;
 
-    public Block (Identifier t, int textureWidth, int textureHeight, Mino mino) {
+    public Block (Identifier t, int textureWidth, int textureHeight, String mino) {
         this.texture = t;
         this.textureWidth = textureWidth;
         this.textureHeight = textureHeight;
@@ -66,19 +66,19 @@ public class Block {
 
     private Identifier getDefaultTexture() {
         Identifier texture = Identifier.of("textures/block/iron_block.png");
-        if (mino instanceof Mino_Square) {
+        if (mino.equals("square")) {
             texture = Identifier.of("textures/block/gold_block.png");
-        } else if (mino instanceof Mino_Bar) {
+        } else if (mino.equals("bar")) {
             texture = Identifier.of("textures/block/diamond_block.png");
-        } else if (mino instanceof Mino_T) {
+        } else if (mino.equals("t")) {
             texture = Identifier.of("textures/block/amethyst_block.png");
-        } else if (mino instanceof Mino_L1) {
+        } else if (mino.equals("l1")) {
             texture = Identifier.of("textures/block/copper_block.png");
-        } else if (mino instanceof Mino_L2) {
+        } else if (mino.equals("l2")) {
             texture = Identifier.of("textures/block/lapis_block.png");
-        } else if (mino instanceof Mino_Z1) {
+        } else if (mino.equals("z1")) {
             texture = Identifier.of("textures/block/redstone_block.png");
-        } else if (mino instanceof Mino_Z2) {
+        } else if (mino.equals("z2")) {
             texture = Identifier.of("textures/block/emerald_block.png");
         }
         return texture;
