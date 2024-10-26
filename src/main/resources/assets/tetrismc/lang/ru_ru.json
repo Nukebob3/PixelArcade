@@ -1,0 +1,30 @@
+{
+  "modmenu.summaryTranslation.tetrismc": "Тетрис в Minecraft",
+  "modmenu.descriptionTranslation.tetrismc": "Экранный тетрис, в который можно поиграть, если вам скучно",
+  "tetrismc:config.mod": "Мод",
+  "tetrismc:config.done": "Готово",
+  "tetrismc:config.enabled": "вкл",
+  "tetrismc:config.disabled": "выкл",
+  "tetrismc:config.title": "Конфигурация Tetris MC",
+  "tetrismc:config.volume": "Громкость",
+  "tetrismc:config.music": "Музыка",
+
+  "tetrismc:tetris.hard_drop": "Превью падения",
+  "tetrismc:tetris.random_texture": "Случайные текстуры:",
+  "tetrismc:tetris.hard_drop.previewless": "Без превью",
+  "tetrismc:tetris.hard_drop.hologram": "голограмма",
+  "tetrismc:tetris.hard_drop.outline": "контур",
+  "tetrismc:tetris.next": "ДАЛЕЕ",
+  "tetrismc:tetris.paused": "ПАУЗА",
+  "tetrismc:tetris.combo": "КОМБО",
+  "tetrismc:tetris.tetris": "ТЕТРИС!!!",
+  "tetrismc:tetris.score": "СЧЁТ",
+  "tetrismc:tetris.lines": "ЛИНИЙ ОЧИЩЕНО",
+  "tetrismc:tetris.high_score": "РЕКОРДНЫЙ СЧЁТ",
+  "tetrismc:tetris.new_high_score": "НОВЫЙ РЕКОРДНЫЙ СЧЁТ",
+
+  "tetrismc:game.start": "Начать игру",
+  "tetrismc:game.return": "Выход в меню",
+  "tetrismc:game.restart": "Перезапуск",
+  "tetrismc:game.pause": "Пауза"
+}
