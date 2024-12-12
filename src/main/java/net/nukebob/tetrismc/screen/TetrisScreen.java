@@ -3,6 +3,8 @@ package net.nukebob.tetrismc.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.navigation.GuiNavigation;
+import net.minecraft.client.gui.navigation.NavigationDirection;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -57,7 +59,7 @@ public class TetrisScreen extends Screen {
     public static int onScreenTextColour;
     public static int onScreenTextOpacity = 0;
 
-    public static int animation = 0;
+    public static float animation = 0;
 
     public final Screen parent;
 
@@ -208,8 +210,9 @@ public class TetrisScreen extends Screen {
                             (nextMino instanceof Mino_L2 || nextMino instanceof Mino_Z1 ? Block.SIZE : (nextMino instanceof Mino_T ? Block.SIZE / 2 : 0)),
                     HEIGHT - (int) (Block.SIZE * 2.5f));
         }
-        currentMino.update(1f);
-        animation++;
+        float frameDuration = MinecraftClient.getInstance().getRenderTickCounter().getLastFrameDuration();
+        currentMino.update(frameDuration*3);
+        animation+=frameDuration*3;
     }
 
     private void gameOver() {
@@ -308,7 +311,8 @@ public class TetrisScreen extends Screen {
 
         //draw destroying minos
         for (Block d : destroying) {
-            d.destroying += 1;
+            d.destroying += MinecraftClient.getInstance().getRenderTickCounter().getLastFrameDuration()*3;
+            if (d.destroying>9) d.destroying = 9;
             d.draw(context);
         }
         destroying.removeIf(d -> d.destroying >= 9);

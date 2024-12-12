@@ -14,7 +14,7 @@ public class Block {
     public String mino;
     public int textureWidth;
     public int textureHeight;
-    public int destroying;
+    public float destroying;
 
     public Block (Identifier t, int textureWidth, int textureHeight, String mino) {
         this.texture = t;
@@ -35,14 +35,14 @@ public class Block {
         }
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        if (destroying == -1) {
+        if ((int) destroying == -1) {
             context.drawTexture(texture, TetrisScreen.left_x + x, TetrisScreen.top_y + y, 0, Block.SIZE * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, Block.SIZE, (int) (Block.SIZE * (float) (textureWidth / textureHeight)));
         } else {
             MinecraftClient.getInstance().getTextureManager().bindTexture(texture);
-            RenderSystem.setShaderColor(1, 1, 1, 1 - (destroying * 0.1f));
+            RenderSystem.setShaderColor(1F, 1F, 1F, (float) (1 - ((int) destroying * 0.1f)));
             context.drawTexture(texture, TetrisScreen.left_x + x, TetrisScreen.top_y + y, 0, Block.SIZE * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, Block.SIZE, (int) (Block.SIZE * (float)(textureWidth / textureHeight)));
             RenderSystem.setShaderColor(1, 1, 1, 1);
-            context.drawTexture(Identifier.of("textures/block/destroy_stage_" + destroying + ".png"), TetrisScreen.left_x + x, TetrisScreen.top_y + y, 0, Block.SIZE * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, Block.SIZE, (int) (Block.SIZE * (float)(textureWidth / textureHeight)));
+            context.drawTexture(Identifier.of("textures/block/destroy_stage_" + (int) destroying + ".png"), TetrisScreen.left_x + x, TetrisScreen.top_y + y, 0, Block.SIZE * (int) (TetrisScreen.animation / 30f), Block.SIZE, Block.SIZE, Block.SIZE, (int) (Block.SIZE * (float)(textureWidth / textureHeight)));
         }
         RenderSystem.disableBlend();
     }
